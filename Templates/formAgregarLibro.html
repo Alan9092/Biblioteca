@@ -1,0 +1,90 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+{% block content %}
+<style>
+    /* Estilos para el formulario */
+.cardFormulario {
+    background-color: var(--sidebar-color);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.formTitulo {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.cardFormulario input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--toggle-color);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.cardFormulario input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.cardFormulario button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cardFormulario button:hover {
+    background-color: #5a5a5a; /* Un tono más oscuro */
+}
+
+</style>
+
+<div class="cardFormulario">
+
+    <h3 class="formTitulo">Registro de libro</h3>
+    <span style="font-size: small;">Rellene la informacion completa para el registro del nuevo libro</span><br><br>
+
+    <form>
+        <div class="mb-3">
+        <label for="folioNuevo" class="form-label">Folio Nuevo:</label>
+        <input type="text" id="folioNuevo" name="folioNuevo">
+        </div>
+        <div class="mb-3">
+        <label for="folioAntiguo">Folio Antiguo:</label>
+        <input type="text" id="folioAntiguo" name="folioAntiguo">
+        </div>
+        <div class="mb-3">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo">
+        </div>
+        <div class="mb-3">
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor">
+        </div>
+        <div class="mb-3">
+        <label for="editorial">Editorial:</label>   
+        <input type="text" id="editorial" name="editorial">
+        </div>
+        <div class="mb-3">
+        <label for="area">Área:</label>
+        <input type="text" id="area" name="area">
+        </div>
+        <button type="submit">Agregar Libro</button>
+    </form>
+    <button type="button">Atrás</button>
+</div>
+{% endblock %}

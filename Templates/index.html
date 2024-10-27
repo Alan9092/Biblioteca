@@ -1,0 +1,162 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+{% block content %}
+
+<!-- CSS de DataTables -->
+<link href="{% static 'statics/css/datatables.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../statics/css/styles.css">
+
+<!-- Estilos personalizados -->
+
+<style>
+    /* Estilos generales */
+    .containerBiblioteca {
+        padding: 20px;
+        background-color: #f8f9fa; /* Color de fondo */
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .encabezadoIndex {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+
+    .encabezadoIndex button {
+        background-color: #007bff; /* Color del botón */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .encabezadoIndex button:hover {
+        background-color: #0056b3; /* Color del botón al pasar el mouse */
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 12px;
+    }
+
+    th {
+        background-color: #007bff; /* Color de fondo de los encabezados */
+        color: white; /* Color del texto de los encabezados */
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Color de fondo de filas pares */
+    }
+
+    .acciones-btns {
+        display: flex;
+        gap: 10px; /* Espaciado entre iconos de acciones */
+    }
+
+    .acciones-btns i {
+        cursor: pointer;
+        color: #007bff; /* Color de los iconos */
+        transition: color 0.3s;
+    }
+
+    .acciones-btns i:hover {
+        color: #0056b3; /* Color de iconos al pasar el mouse */
+    }
+</style>
+<div class="containerBiblioteca">
+
+    <nav>
+        <ol>
+            Libros
+        </ol>
+    </nav>
+
+    <div class="encabezadoIndex">
+        <button>
+            <i class="fas fa-plus"></i> Agregar libro
+        </button>
+    </div>
+
+    <div class="table-responsive mt-5">
+        <table id="librosTable" class="table table-hover nowrap" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo Electrónico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Juan</td>
+                    <td>Pérez</td>
+                    <td>juan.perez@example.com</td>
+                    <td class="acciones-btns">
+                        <i class="fas fa-edit" title="Editar"></i>
+                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>María</td>
+                    <td>Gómez</td>
+                    <td>maria.gomez@example.com</td>
+                    <td class="acciones-btns">
+                        <i class="fas fa-edit" title="Editar"></i>
+                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Carlos</td>
+                    <td>Ramírez</td>
+                    <td>carlos.ramirez@example.com</td>
+                    <td class="acciones-btns">
+                        <i class="fas fa-edit" title="Editar"></i>
+                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- JS de DataTables -->
+<script src="{% static 'statics/js/datatables.min.js' %}"></script>
+<script src="https://kit.fontawesome.com/76cbf2a826.js" crossorigin="anonymous"></script>
+
+<script>
+    // Inicialización de la tabla con DataTables
+    $(document).ready(function () {
+        $('#librosTable').DataTable({
+            responsive: true,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+            }
+        });
+    });
+</script>
