@@ -1,0 +1,142 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+{% block content %}
+<style>
+    /* Estilos de la tarjeta del formulario */
+    .cardFormulario {
+        background-color: var(--sidebar-color);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        margin: 30px auto;
+        max-width: 800px; /* Aumenta el ancho */
+    }
+
+    .formTitulo {
+        font-size: 28px;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-subtitulo {
+        font-size: 15px;
+        color: #555;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .cardFormulario input[type="text"] {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid var(--toggle-color);
+        border-radius: 6px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s ease;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .cardFormulario input[type="text"]:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Estilos para los botones */
+    .botones-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .botones-container button {
+        flex: 1;
+        padding: 12px 0;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-agregar {
+        background-color: #2AB27B;
+        color: white;
+    }
+
+    .btn-agregar:hover {
+        background-color: #1d885e; 
+    }
+
+    .btn-atras {
+        background-color: #888888;
+        color: white;
+    }
+
+    .btn-atras:hover {
+        background-color: #666666;
+    }
+</style>
+
+<div class="cardFormulario">
+    <h3 class="formTitulo">Registro de Tesis</h3>
+    <div class="form-subtitulo">Rellene la información completa para registrar una nueva Tesis</div>
+
+    <form>
+        <div class="mb-3">
+            <label for="folioNuevo" class="form-label">Folio Nuevo:</label>
+            <input type="text" id="folioNuevo" name="folioNuevo">
+        </div>
+        <div class="mb-3">
+            <label for="NumControl" class="form-label">Numero de Control:</label>
+            <input type="text" id="NumControl" name="NumControl">
+        </div>
+        <div class="mb-3">
+            <label for="Nombre" class="form-label">Nombre:</label>
+            <input type="text" id="Nombre" name="Nombre">
+        </div>
+        <div class="mb-3">
+            <label for="Grupo" class="form-label">Grupo:</label>
+            <input type="text" id="Grupo" name="Grupo">
+        </div>
+        <div class="mb-3">
+            <label for="Nivel" class="form-label">Nivel:</label>
+            <input type="text" id="Nivel" name="Nivel">
+        </div>
+        <div class="mb-3">
+            <label for="Generacion" class="form-label">Generacion:</label>
+            <input type="text" id="Generacion" name="Generacion">
+        </div>
+        <div class="mb-3">
+            <label for="TituloTS" class="form-label">Titulo de la tesis:</label>
+            <input type="text" id="TituloTS" name="TituloTS">
+        </div>
+        <div class="mb-3">
+            <label for="AsesorA" class="form-label">Asesor Academico:</label>
+            <input type="text" id="AsesorA" name="AsesorA">
+        </div>
+        <div class="mb-3">
+            <label for="AsesorE" class="form-label">Asesor Empresarial:</label>
+            <input type="text" id="area" name="AsesorE">
+        </div>
+        <div class="mb-3">
+            <label for="CodigoB" class="form-label">Codigo de Barras:</label>
+            <input type="text" id="CodigoB" name="CodigoB">
+        </div>
+
+        <div class="botones-container">
+            <button type="submit" class="btn-agregar">Agregar Tesis</button>
+            <button type="button" class="btn-atras" onclick="history.back()">Atrás</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="../statics/css/styles.css">
+    <!-- ===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <!-- ===== Bootstrap CSS ===== -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            color: #ff0c0c;
+            width: 250px;
+            transition: width 0.3s;
+        }
+
+        .sidebar .icon,
+        .sidebar .nav-text {
+            color: #000000;
+        }
+
+        .sidebar .menu-links li a:hover {
+            background-color: #00947E;
+        }
+
+        .no-hover:hover {
+            background-color: inherit;
+            color: inherit;
+            cursor: default;
+        }
+
+
+        .navbar {
+            background-color: #00947E;
+            color: #000000;
+            cursor: default;
+        }
+
+        .brand-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .brand-title:hover {
+            color: #000000;
+        }
+    </style>
+
+    {% block stylecontent %}
+    {% endblock %}
+</head>
+
+<body>
+    <nav class="sidebar close">
+        <header>
+            <i class='bx bx-menu toggle'></i>
+        </header>
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text">
+                </li>
+
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-book-alt icon'></i>
+                            <span class="text nav-text">Libros</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="prestamos/#">
+                            <i class='bx bx-archive-out icon'></i>
+                            <span class="text nav-text">Prestamos</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-file icon'></i>
+                            <span class="text nav-text">Tesis</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content no-hover">
+                <li class="">
+                    <a href="#">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <span class="brand-title">Nombre del sistema</span>
+            </div>
+        </nav>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const body = document.querySelector('body'),
+            sidebar = body.querySelector('nav.sidebar'),
+            toggle = body.querySelector(".toggle");
+
+        toggle.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+    </script>
+</body>
+
+</html>

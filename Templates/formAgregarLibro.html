@@ -1,0 +1,126 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+{% block content %}
+<style>
+    /* Estilos de la tarjeta del formulario */
+    .cardFormulario {
+        background-color: var(--sidebar-color);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        margin: 30px auto;
+        max-width: 800px; /* Aumenta el ancho */
+    }
+
+    .formTitulo {
+        font-size: 28px;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-subtitulo {
+        font-size: 15px;
+        color: #555;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .cardFormulario input[type="text"] {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid var(--toggle-color);
+        border-radius: 6px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s ease;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .cardFormulario input[type="text"]:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Estilos para los botones */
+    .botones-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .botones-container button {
+        flex: 1;
+        padding: 12px 0;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-agregar {
+        background-color: #2AB27B;
+        color: white;
+    }
+
+    .btn-agregar:hover {
+        background-color: #1d885e; 
+    }
+
+    .btn-atras {
+        background-color: #888888;
+        color: white;
+    }
+
+    .btn-atras:hover {
+        background-color: #666666;
+    }
+</style>
+
+<div class="cardFormulario">
+    <h3 class="formTitulo">Registro de Libro</h3>
+    <div class="form-subtitulo">Rellene la información completa para registrar un nuevo libro</div>
+
+    <form>
+        <div class="mb-3">
+            <label for="folioNuevo" class="form-label">Folio Nuevo:</label>
+            <input type="text" id="folioNuevo" name="folioNuevo">
+        </div>
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título:</label>
+            <input type="text" id="titulo" name="titulo">
+        </div>
+        <div class="mb-3">
+            <label for="autor" class="form-label">Autor:</label>
+            <input type="text" id="autor" name="autor">
+        </div>
+        <div class="mb-3">
+            <label for="editorial" class="form-label">Editorial:</label>
+            <input type="text" id="editorial" name="editorial">
+        </div>
+        <div class="mb-3">
+            <label for="volumen" class="form-label">Volumen:</label>
+            <input type="text" id="volumen" name="volumen">
+        </div>
+        <div class="mb-3">
+            <label for="area" class="form-label">Área:</label>
+            <input type="text" id="area" name="area">
+        </div>
+
+        <div class="botones-container">
+            <button type="submit" class="btn-agregar">Agregar Libro</button>
+            <button type="button" class="btn-atras" onclick="history.back()">Atrás</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
