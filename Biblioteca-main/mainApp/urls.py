@@ -7,4 +7,5 @@ urlpatterns = [
     path('index/', views.index, name ="index"),
     path('formagg/', views.formAgg, name='formagg'),
     path('prestamos/', views.prestamos, name='prestamos'),
+    path('tesis/', views.tesis, name='tesis'),
 ]

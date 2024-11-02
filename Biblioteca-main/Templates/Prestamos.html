@@ -1,6 +1,7 @@
 {% extends 'sidebar.html' %}
 {% load static %}
 {% block content %}
+
 <!-- CSS de DataTables -->
 <link href="{% static 'statics/css/datatables.min.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="../statics/css/styles.css">
@@ -11,7 +12,8 @@
     /* Estilos generales */
     .containerBiblioteca {
         padding: 20px;
-        background-color: #f8f9fa; /* Color de fondo */
+        background-color: #f8f9fa;
+        /* Color de fondo */
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
@@ -20,6 +22,7 @@
         font-size: 1.5rem;
         font-weight: bold;
         margin-bottom: 20px;
+        text-align: center;
     }
 
     .encabezadoIndex {
@@ -29,7 +32,8 @@
     }
 
     .encabezadoIndex button {
-        background-color: #007bff; /* Color del botón */
+        background-color: #2AB27B;
+        /* Color del botón */
         color: white;
         border: none;
         border-radius: 5px;
@@ -39,7 +43,8 @@
     }
 
     .encabezadoIndex button:hover {
-        background-color: #0056b3; /* Color del botón al pasar el mouse */
+        background-color: #218d62;
+        /* Color del botón al pasar el mouse */
     }
 
     .table-responsive {
@@ -50,91 +55,81 @@
         width: 100%;
         border-collapse: collapse;
         margin-top: 15px;
+        border: 1px solid black;
     }
 
-    th, td {
+    th,
+    td {
         text-align: left;
         padding: 12px;
     }
 
     th {
-        background-color: #007bff; /* Color de fondo de los encabezados */
-        color: white; /* Color del texto de los encabezados */
+        background-color: #ffffff;
+        /* Color de fondo de los encabezados */
+        color: rgb(0, 0, 0);
+        /* Color del texto de los encabezados */
     }
 
     tr:nth-child(even) {
-        background-color: #f2f2f2; /* Color de fondo de filas pares */
+        background-color: #f2f2f2;
+        /* Color de fondo de filas pares */
     }
 
     .acciones-btns {
         display: flex;
-        gap: 10px; /* Espaciado entre iconos de acciones */
+        gap: 10px;
+        /* Espaciado entre iconos de acciones */
     }
 
-    .acciones-btns i {
-        cursor: pointer;
-        color: #007bff; /* Color de los iconos */
-        transition: color 0.3s;
-    }
-
-    .acciones-btns i:hover {
-        color: #0056b3; /* Color de iconos al pasar el mouse */
-    }
 </style>
 <div class="containerBiblioteca">
 
     <nav>
         <ol>
-            Prestaciones de libros
+            Prestamos
         </ol>
     </nav>
 
-    <div class="encabezadoIndex">
-        <button>
-            <i class="fas fa-plus"></i> Prestar libro
-        </button>
-    </div>
+
 
     <div class="table-responsive mt-5">
         <table id="librosTable" class="table table-hover nowrap" style="width: 100%;">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo Electrónico</th>
+                    <th>Libro</th>
+                    <th>Nombre del solicitante</th>
+                    <th>Fecha de prestamo</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>Juan</td>
-                    <td>Pérez</td>
-                    <td>juan.perez@example.com</td>
+                    <td>Cien años de soledad</td>
+                    <td>Alan Jimenez</td>
+                    <td>16/10/2024</td>
+                    <td>Devuelto</td>
                     <td class="acciones-btns">
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                        <i class='bx bx-show icono-ver' title="Ver"></i>
                     </td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td>María</td>
-                    <td>Gómez</td>
-                    <td>maria.gomez@example.com</td>
+                    <td>1984</td>
+                    <td>Ricardo Sanabia</td>
+                    <td>25/10/2024</td>
+                    <td>Devuelto</td>
                     <td class="acciones-btns">
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                        <i class='bx bx-show icono-ver' title="Ver"></i>
                     </td>
                 </tr>
                 <tr>
-                    <td>3</td>
-                    <td>Carlos</td>
-                    <td>Ramírez</td>
-                    <td>carlos.ramirez@example.com</td>
+                    <td>El amor en los tiempos del cólera</td>
+                    <td>Christian Gomez</td>
+                    <td>30/10/2024</td>
+                    <td>Devuelto</td>
                     <td class="acciones-btns">
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                        <i class='bx bx-show icono-ver' title="Ver"></i>
                     </td>
                 </tr>
             </tbody>

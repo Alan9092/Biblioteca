@@ -16,7 +16,7 @@
     --primary-color-light: #F6F5FF;
     --toggle-color: #DDD;
     --text-color: #707070;
-    --navbar-color: #f8f9fa; /* Color del navbar */
+    --navbar-color: #00947E; /* Color del navbar */
     --navbar-border-color: #e0e0e0; /* Color de borde del navbar */
 
     /* ====== Transition ====== */
@@ -25,11 +25,6 @@
     --tran-05: all 0.3s ease;
 }
 
-body {
-    min-height: 100vh;
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-}
 
 ::selection {
     background-color: var(--primary-color);
@@ -325,11 +320,6 @@ body.dark .home .text {
 }
 
 /* ===== Navbar ===== */
-.navbar {
-    background-color: var(--navbar-color);
-    border-bottom: 1px solid var(--navbar-border-color);
-}
-
 .navbar .navbar-brand {
     color: var(--primary-color);
     font-weight: 600;
@@ -350,4 +340,88 @@ body.dark .navbar .navbar-brand {
 
 body.dark .navbar .navbar-brand:hover {
     color: var(--primary-color-light);
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    background-color: #ffffff;
+    color: #ff0c0c;
+    width: 250px;
+    transition: width 0.3s;
+}
+
+.sidebar .icon,
+.sidebar .nav-text {
+    color: #000000;
+}
+
+.sidebar .menu-links li a:hover {
+    background-color: #00947E;
+}
+
+.no-hover:hover {
+    background-color: inherit;
+    color: inherit;
+    cursor: default;
+}
+
+
+.navbar {
+    background-color: #00947E;
+    color: #000000;
+    cursor: default;
+}
+
+.brand-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.brand-title:hover {
+    color: #000000;
+}
+
+.icono-eliminar {
+    color: #ffffff !important;
+    background-color: #DC3545; /* Rojo */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.icono-editar {
+    color: #ffffff !important;
+    background-color: #EDC30F; /* Azul */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.icono-asignar {
+    color: #ffffff !important;
+    background-color: #6235DC; /* Naranja */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.icono-ver-libro {
+    color: #ffffff !important;
+    background-color: #2AB27B; /* Verde */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.icono-ver {
+    color: #ffffff !important;
+    background-color: #2AB27B; /* Verde */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
 }

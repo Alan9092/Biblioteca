@@ -18,5 +18,8 @@ def formAgg(request):
 def prestamos(request):
     return render(request, 'Prestamos.html')
 
+def tesis(request):
+    return render(request, 'Tesis.html')
+
 def formPL(request):
     return render(request, 'formPrestamo.html')
