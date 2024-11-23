@@ -2,89 +2,126 @@
 {% load static %}
 {% block content %}
 <style>
-    /* Estilos para el formulario */
-.cardFormulario {
-    background-color: var(--sidebar-color);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-}
+    /* Estilos de la tarjeta del formulario */
+    .cardFormulario {
+        background-color: var(--sidebar-color);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        margin: 30px auto;
+        max-width: 800px;
+        animation: fadeIn 0.6s ease-in-out;
+    }
 
-.formTitulo {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
+    .formTitulo {
+        font-size: 28px;
+        font-weight: bold;
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-.form-label {
-    font-weight: 500;
-    color: var(--primary-color);
-}
+    .form-subtitulo {
+        font-size: 15px;
+        color: #555;
+        text-align: center;
+        margin-bottom: 25px;
+    }
 
-.cardFormulario input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--toggle-color);
-    border-radius: 6px;
-    margin-bottom: 15px;
-    transition: border-color 0.3s ease;
-}
+    .form-label {
+        font-weight: 600;
+        color: var(--primary-color);
+        display: block;
+        margin-bottom: 8px;
+    }
 
-.cardFormulario input[type="text"]:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
+    .cardFormulario input[type="text"],
+    .cardFormulario select,
+    .cardFormulario textarea {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid var(--toggle-color);
+        border-radius: 6px;
+        margin-bottom: 15px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        font-size: 16px;
+        color: #333;
+        background-color: #f9f9f9;
+    }
 
-.cardFormulario button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .cardFormulario input[type="text"]:focus,
+    .cardFormulario select:focus,
+    .cardFormulario textarea:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        background-color: #fff;
+    }
 
-.cardFormulario button:hover {
-    background-color: #5a5a5a; /* Un tono más oscuro */
-}
+    /* Estilos para los botones */
+    .botones-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
 
+    .botones-container button {
+        flex: 1;
+        padding: 12px 0;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    .btn-agregar {
+        background-color: #2AB27B;
+        color: white;
+    }
+
+    .btn-agregar:hover {
+        background-color: #1d885e; 
+        transform: translateY(-2px);
+    }
+
+    .btn-atras {
+        background-color: #888888;
+        color: white;
+    }
+
+    .btn-atras:hover {
+        background-color: #666666;
+        transform: translateY(-2px);
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 </style>
 
 <div class="cardFormulario">
+    <h3 class="formTitulo">Registro de Libro</h3>
+    <div class="form-subtitulo">Rellene la información completa para registrar un nuevo libro</div>
 
-    <h3 class="formTitulo">Registro de libro</h3>
-    <span style="font-size: small;">Rellene la informacion completa para el registro del nuevo libro</span><br><br>
-
-    <form>
-        <div class="mb-3">
-        <label for="folioNuevo" class="form-label">Folio Nuevo:</label>
-        <input type="text" id="folioNuevo" name="folioNuevo">
+    <form method="post" action="{% if libro %}{% url 'editar_libro' libro.id %}{% else %}{% url 'agregar_libro' %}{% endif %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="botones-container">
+            <button type="submit" class="btn-agregar">
+                {% if libro %}Guardar Cambios{% else %}Agregar Libro{% endif %}
+            </button>
+            <button type="button" class="btn-atras" onclick="history.back()">Atrás</button>
         </div>
-        <div class="mb-3">
-        <label for="folioAntiguo">Folio Antiguo:</label>
-        <input type="text" id="folioAntiguo" name="folioAntiguo">
-        </div>
-        <div class="mb-3">
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo">
-        </div>
-        <div class="mb-3">
-        <label for="autor">Autor:</label>
-        <input type="text" id="autor" name="autor">
-        </div>
-        <div class="mb-3">
-        <label for="editorial">Editorial:</label>   
-        <input type="text" id="editorial" name="editorial">
-        </div>
-        <div class="mb-3">
-        <label for="area">Área:</label>
-        <input type="text" id="area" name="area">
-        </div>
-        <button type="submit">Agregar Libro</button>
     </form>
-    <button type="button">Atrás</button>
 </div>
 {% endblock %}

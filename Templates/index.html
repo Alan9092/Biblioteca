@@ -3,13 +3,14 @@
 {% block content %}
 
 <!-- CSS de DataTables -->
-<link href="{% static 'statics/css/datatables.min.css' %}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="../statics/css/styles.css">
+<link href="{% static 'css/datatables.min.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <!-- Estilos personalizados -->
 
 <style>
-    /* Estilos generales */
+    
     .containerBiblioteca {
         padding: 20px;
         background-color: #f8f9fa; /* Color de fondo */
@@ -83,7 +84,6 @@
     }
 </style>
 <div class="containerBiblioteca">
-
     <nav>
         <ol>
             Libros
@@ -91,53 +91,38 @@
     </nav>
 
     <div class="encabezadoIndex">
-        <button>
-            <i class="fas fa-plus"></i> Agregar libro
-        </button>
+        <a href="{% url 'agregar_libro' %}">
+            <button>
+                <i class="fas fa-plus"></i> Agregar libro
+            </button>
+        </a>
     </div>
 
     <div class="table-responsive mt-5">
+        <!-- Tabla completa con encabezado y cuerpo de la tabla -->
         <table id="librosTable" class="table table-hover nowrap" style="width: 100%;">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo Electrónico</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Folio</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
+                {% for libro in libros %}
                 <tr>
-                    <td>1</td>
-                    <td>Juan</td>
-                    <td>Pérez</td>
-                    <td>juan.perez@example.com</td>
+                    <td>{{ libro.id }}</td>
+                    <td>{{ libro.titulo }}</td>
+                    <td>{{ libro.autor }}</td>
+                    <td>{{ libro.folio }}</td>
                     <td class="acciones-btns">
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                        <a href="{% url 'editar_libro' libro.id %}"><i class='bx bx-edit icono-editar' title="Editar"></i></a>
+                        <a href="{% url 'eliminar_libro' libro.id %}"> <i class='bx bx-trash icono-eliminar' title="Eliminar"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>María</td>
-                    <td>Gómez</td>
-                    <td>maria.gomez@example.com</td>
-                    <td class="acciones-btns">
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Carlos</td>
-                    <td>Ramírez</td>
-                    <td>carlos.ramirez@example.com</td>
-                    <td class="acciones-btns">
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

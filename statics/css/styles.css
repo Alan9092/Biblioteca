@@ -29,6 +29,7 @@ body {
     min-height: 100vh;
     background-color: var(--body-color);
     transition: var(--tran-05);
+    font-family: Arial, sans-serif;
 }
 
 ::selection {
@@ -56,14 +57,14 @@ body.dark {
     padding: 10px 1px;
     background: var(--sidebar-color);
     transition: var(--tran-05);
-    z-index: 1000;  
+    z-index: 1000;
+    color: #ff0c0c;
 }
 
 .sidebar.close {
     width: 80px;
 }
 
-/* ===== Reusable code - Here ===== */
 .sidebar li {
     height: 60px;
     list-style: none;
@@ -72,10 +73,9 @@ body.dark {
     margin-top: 10px;
 }
 
-.sidebar header .image,
-.sidebar .icon {
-    min-width: 660px;
-    border-radius: 6px;
+.sidebar .icon,
+.sidebar .nav-text {
+    color: #000000;
 }
 
 .sidebar .icon {
@@ -88,59 +88,20 @@ body.dark {
     font-size: 20px;
 }
 
-.sidebar .text,
-.sidebar .icon {
-    color: var(--text-color);
-    transition: var(--tran-03);
-}
-
 .sidebar .text {
     font-size: 17px;
     font-weight: 500;
     white-space: nowrap;
     opacity: 1;
+    transition: var(--tran-03);
 }
 
 .sidebar.close .text {
     opacity: 0;
 }
-/* =========================== */
 
 .sidebar header {
     position: relative;
-}
-
-.sidebar header .image-text {
-    display: flex;
-    align-items: center;
-}
-
-.sidebar header .logo-text {
-    display: flex;
-    flex-direction: column;
-}
-
-header .image-text .name {
-    margin-top: 2px;
-    font-size: 18px;
-    font-weight: 600;
-}
-
-header .image-text .profession {
-    font-size: 16px;
-    margin-top: -2px;
-    display: block;
-}
-
-.sidebar header .image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar header .image img {
-    width: 40px;
-    border-radius: 6px;
 }
 
 .sidebar header .toggle {
@@ -207,17 +168,7 @@ body.dark .sidebar header .toggle {
 }
 
 .sidebar li a:hover {
-    background-color: var(--primary-color);
-}
-
-.sidebar li a:hover .icon,
-.sidebar li a:hover .text {
-    color: var(--sidebar-color);
-}
-
-body.dark .sidebar li a:hover .icon,
-body.dark .sidebar li a:hover .text {
-    color: var(--text-color);
+    background-color: #00947E;
 }
 
 .sidebar .menu-bar {
@@ -232,71 +183,25 @@ body.dark .sidebar li a:hover .text {
     display: none;
 }
 
-.sidebar .menu-bar .mode {
-    border-radius: 6px;
-    background-color: var(--primary-color-light);
-    position: relative;
-    transition: var(--tran-05);
+/* ===== Navbar ===== */
+.navbar {
+    background-color: #00947E;
+    border-bottom: 1px solid var(--navbar-border-color);
 }
 
-.menu-bar .mode .sun-moon {
-    height: 50px;
-    width: 60px;
+.navbar .brand-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.mode .sun-moon i {
-    position: absolute;
+.brand-title:hover {
+    color: #000000;
 }
 
-.mode .sun-moon i.sun {
-    opacity: 0;
-}
-
-body.dark .mode .sun-moon i.sun {
-    opacity: 1;
-}
-
-body.dark .mode .sun-moon i.moon {
-    opacity: 0;
-}
-
-.menu-bar .bottom-content .toggle-switch {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    min-width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-}
-
-.toggle-switch .switch {
-    position: relative;
-    height: 22px;
-    width: 40px;
-    border-radius: 25px;
-    background-color: var(--toggle-color);
-    transition: var(--tran-05);
-}
-
-.switch::before {
-    content: '';
-    position: absolute;
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    background-color: var(--sidebar-color);
-    transition: var(--tran-04);
-}
-
-body.dark .switch::before {
-    left: 20px;
-}
-
+/* ===== Home Section ===== */
 .home {
     position: absolute;
     top: 0;
@@ -305,6 +210,7 @@ body.dark .switch::before {
     width: calc(100% - 250px);
     background-color: var(--body-color);
     transition: var(--tran-05);
+    overflow-x: hidden;
 }
 
 .home .text {
@@ -319,35 +225,42 @@ body.dark .switch::before {
     height: 100vh;
     width: calc(100% - 78px);
 }
-
-body.dark .home .text {
-    color: var(--text-color);
+.icono-eliminar {
+    color: #ffffff !important;
+    background-color: #DC3545; /* Rojo */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
 }
 
-/* ===== Navbar ===== */
-.navbar {
-    background-color: var(--navbar-color);
-    border-bottom: 1px solid var(--navbar-border-color);
+.icono-editar {
+    color: #ffffff !important;
+    background-color: #EDC30F; /* Azul */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
 }
 
-.navbar .navbar-brand {
-    color: var(--primary-color);
-    font-weight: 600;
-    transition: var(--tran-03);
+.icono-asignar {
+    color: #ffffff !important;
+    background-color: #6235DC; /* Naranja */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
 }
 
-.navbar .navbar-brand:hover {
-    color: var(--text-color);
+.icono-ver-libro {
+    color: #ffffff !important;
+    background-color: #2AB27B; /* Verde */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
 }
 
-body.dark .navbar {
-    background-color: var(--navbar-color);
-}
-
-body.dark .navbar .navbar-brand {
-    color: var(--text-color);
-}
-
-body.dark .navbar .navbar-brand:hover {
-    color: var(--primary-color-light);
+.icono-ver {
+    color: #ffffff !important;
+    background-color: #2AB27B; /* Verde */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 24px;
 }
