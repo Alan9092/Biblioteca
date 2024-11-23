@@ -25,3 +25,19 @@ class Prestamo(models.Model):
 
     def __str__(self):
         return f"Prestamo {self.numero_control} - {self.libro.titulo}"
+    
+    from django.db import models
+
+class Tesis(models.Model):
+    numero_de_control = models.CharField(max_length=20, unique=True)
+    nombre1 = models.CharField(max_length=100)
+    grado_y_grupo = models.CharField(max_length=50)
+    nivel = models.CharField(max_length=50)
+    generacion = models.CharField(max_length=50)
+    titulo_de_tesis = models.CharField(max_length=200)
+    asesor_academico = models.CharField(max_length=100)
+    asesor_empresarial = models.CharField(max_length=100, blank=True, null=True)
+    codigo_de_barras = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return f"{self.titulo_de_tesis} ({self.numero_de_control})"

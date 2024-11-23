@@ -5,7 +5,7 @@
 <!-- CSS de DataTables -->
 <link href="{% static 'statics/css/datatables.min.css' %}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="../statics/css/styles.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- Estilos personalizados -->
 
 <style>
@@ -91,9 +91,11 @@
     </nav>
 
     <div class="encabezadoIndex">
-        <button>
-            <i class="fas fa-plus"></i> Agregar Tesis
-        </button>
+        <a href="{% url 'formTesis' %}">
+            <button>
+                <i class="fas fa-plus"></i> Agregar Tesis
+            </button>
+            </a>
     </div>
 
     <div class="table-responsive mt-5">
@@ -109,42 +111,23 @@
                 </tr>
             </thead>
             <tbody>
+                {% for tesis in tesis_list %}
                 <tr>
-                    <td>1</td>
-                    <td>Inovacion con IA</td>
-                    <td>Juan Perez</td>
-                    <td>TICS</td>
-                    <td>Alberto Garcia</td>
+                    <td>{{ tesis.id }}</td>
+                    <td>{{ tesis.titulo_de_tesis }}</td>
+                    <td>{{ tesis.nombre1 }}</td>
+                    <td>{{ tesis.nivel }}</td>
+                    <td>{{ tesis.asesor_academico }}</td>
                     <td class="acciones-btns">
-                        <i class="fas fa-edit" title="visualizar"></i>
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
+                        <a href="{% url 'editar_tesis' tesis.pk %}"><i class="bx bx-edit icono-editar" title="Editar"></i></a>
+                        <a href="{% url 'eliminar_tesis' tesis.pk %}"><i class="bx bx-trash icono-eliminar" title="Eliminar"></i></a>
                     </td>
                 </tr>
+                {% empty %}
                 <tr>
-                    <td>2</td>
-                    <td>Resolucion de gastos</td>
-                    <td>Juan lopez</td>
-                    <td>Contaduria</td>
-                    <td>Juan fernandez</td>
-                    <td class="acciones-btns">
-                        <i class="fas fa-edit" title="visualizar"></i>
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
-                    </td>
+                    <td colspan="6">No hay tesis registradas.</td>
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Energias naturales</td>
-                    <td>Israel Becerra</td>
-                    <td>Energias Renovables</td>
-                    <td>Juan almada</td>
-                    <td class="acciones-btns">
-                        <i class="fas fa-edit" title="visualizar"></i>
-                        <i class="fas fa-edit" title="Editar"></i>
-                        <i class="fas fa-trash-alt" title="Eliminar"></i>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

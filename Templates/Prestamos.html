@@ -120,9 +120,7 @@
                     <td>{{ prestamo.estado }}</td>
                     <td class="acciones-btns">
                         <a href="{% url 'editar_prestamo' prestamo.id %}"><i class="bx bx-edit icono-editar" title="Editar"></i></a>
-                        <a href="{% url 'eliminar_prestamo' prestamo.id %}" onclick="return confirm('¿Está seguro de eliminar este préstamo?');">
-                            <i class='bx bx-trash icono-eliminar' title="Eliminar"></i>
-                        </a>
+                        <a href="{% url 'eliminar_prestamo' prestamo.id %}"><i class='bx bx-trash icono-eliminar' title="Eliminar"></i></a>
                     </td>
                 </tr>
                 {% empty %}

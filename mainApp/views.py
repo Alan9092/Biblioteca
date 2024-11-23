@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
-from .forms import LibroForm, PrestamoForm
-from .models import Libro, Prestamo
+from .forms import LibroForm, PrestamoForm, TesisForm
+from .models import Libro, Prestamo, Tesis
 
 # Create your views here.
 def inicio(request):
@@ -23,8 +23,7 @@ def prestamos(request):
 def formPL(request):
     return render(request, 'formPrestamo.html')
 
-def Tesis(request):
-    return render(request, 'Tesis.html')
+
 
 def formTesis(request):
     return render(request, 'formTesis.html')
@@ -99,3 +98,26 @@ def eliminar_prestamo(request, pk):
         prestamo.delete()
         return redirect('lista_prestamos')
     return render(request, 'confirm_delete.html', {'prestamo': prestamo})
+
+def crear_editar_tesis(request, pk=None):
+    tesis = get_object_or_404(Tesis, pk=pk) if pk else None
+    if request.method == 'POST':
+        form = TesisForm(request.POST, instance=tesis)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_tesis')
+    else:
+        form = TesisForm(instance=tesis)
+        
+    return render(request, 'formTesis.html', {'form': form})
+
+def listar_tesis(request):
+    tesis_list = Tesis.objects.all()
+    return render(request, 'Tesis.html', {'tesis_list': tesis_list})
+
+def eliminar_tesis(request, pk):
+    tesis = get_object_or_404(Tesis, pk=pk)
+    if request.method == 'POST':
+        tesis.delete()
+        return redirect('listar_tesis')
+    return render(request, 'eliminar_tesis.html', {'tesis': tesis})
