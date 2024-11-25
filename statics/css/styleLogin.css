@@ -1,0 +1,146 @@
+/* Estilo global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.login-container {
+    background-color: #00AA89;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    transition: box-shadow 0.3s ease;
+}
+
+.login-container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25), 0 8px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Formulario */
+.login-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Espaciado adicional entre los campos de entrada y el botón */
+.input-group {
+    margin-bottom: 20px; /* Espacio entre los campos */
+}
+
+.input-label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus {
+    border-color: #00AA89;
+    outline: none;
+}
+
+/* Botón */
+
+.btn-submit {
+    margin-top: 20px; /* Aumentar espacio entre el botón y el último campo */
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background-color: #00AA89;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #008f72;
+}
+
+/* Animación para mostrar el paso de contraseña */
+.slide-in {
+    animation: slideIn 0.5s ease forwards;
+}
+
+/* Definición de la animación */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Ocultar el paso inicial sin animación */
+.hidden {
+    display: none;
+}
+/* Animaciones */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aplicar la animación */
+.animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Mensaje de bienvenida */
+.email-text {
+    color: #00AA89;
+    font-weight: bold;
+    font-size: 0.6em;
+    display: inline-block;
+    margin-top: 10px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Ajustes generales */
+#error-message {
+    font-size: 14px;
+    margin-top: 10px;
+}
+

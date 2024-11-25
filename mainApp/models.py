@@ -1,5 +1,24 @@
 from django.db import models
 from django.utils.timezone import now
+from django.contrib.auth.hashers import make_password
+
+
+class Usuario(models.Model):
+    idUsuario = models.AutoField(primary_key=True)  # Campo autoincremental
+    nombre = models.CharField(max_length=150)      # Campo de texto con un límite de 150 caracteres
+    correo = models.EmailField(max_length=255, unique=True)  # Nuevo campo de correo único
+    password = models.CharField(max_length=128)    # Campo para almacenar la contraseña cifrada
+
+    # Sobrescribir el método save para cifrar la contraseña automáticamente
+    def save(self, *args, **kwargs):
+        # Verifica si la contraseña ya está cifrada
+        if not self.password.startswith('pbkdf2_'):
+            self.password = make_password(self.password)  # Cifra la contraseña
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.nombre} ({self.correo})"
+
 
 class Libro(models.Model):
     titulo = models.CharField(max_length=255)
