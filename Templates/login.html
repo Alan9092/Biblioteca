@@ -9,29 +9,47 @@
 </head>
 <body class="login">
     <div class="login-container">
+        <!-- Fase 1: Validación de correo -->
         <div id="fase1" class="login-form">
             <h1 class="login-title">Bienvenido</h1>
-            <form id="emailForm">
+            <form id="emailForm" method="POST">
+                {% csrf_token %}
                 <div class="input-group animate-fade-in">
                     <label for="email" class="input-label">Correo electrónico</label>
-                    <input type="text" id="email" name="email" class="input-field" placeholder="Ingresa tu correo" required>
+                    <input type="email" id="email" name="email" class="input-field" placeholder="Ingresa tu correo" required>
                 </div>
                 <button id="nextStep" type="submit" class="btn-submit animate-fade-in">Siguiente</button>
                 <div id="error-message" style="display:none; color:red; text-align:center; margin-top:10px;">Correo no válido</div>
             </form>
         </div>
 
+        <!-- Fase 2: Validación de contraseña -->
         <div id="fase2" class="login-form" style="display: none;">
             <h1 class="login-title">Bienvenido, <span class="email-text" id="displayEmail"></span></h1>
-            <form action="/login" method="post">
+            <form id="passwordForm" method="POST">
+                {% csrf_token %}
                 <div class="input-group animate-fade-in">
                     <label for="password" class="input-label">Contraseña</label>
                     <input type="password" id="password" name="password" class="input-field" placeholder="Ingresa tu contraseña" required>
                 </div>
-                <button id="signIn" type="submit" class="btn-submit animate-fade-in">Iniciar sesión</button>
+                <button id="signIn" type="submit" class="btn-submit animate-fade-in">
+                    <span id="btnText">Iniciar sesión</span>
+                    <!-- Spinner con Font Awesome -->
+                    <span id="spinner" style="display:none;" class="fa fa-spinner fa-spin"></span>  <!-- Spinner con icono Font Awesome -->
+                </button>
+                
+                <!-- Mostrar el mensaje de error si la contraseña es incorrecta
+                {% if messages %}
+                    <div style="color:red; text-align:center;">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %} -->
             </form>
         </div>
     </div>
+
     <script src="../statics/js/scripts.js"></script>
 </body>
 </html>

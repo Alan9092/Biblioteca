@@ -2,9 +2,14 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.inicio, name='inicio'),  # Ruta de la vista inicio
+    path('', views.login_view, name='login'),  # Redirige directamente a la vista de login
+    path('login/', views.login_view, name='login'),  # Vista del login
+    path('index/', views.index_view, name='index'),  # Vista del index, después de login
     path('sidebar/', views.dashboard, name="sidebar"),
-    path('index/', views.lista_libros, name="index"),  # Cambiar para listar libros en 'index'
+    
+    # Asegúrate de tener solo una ruta para 'index'
+    path('index/', views.lista_libros, name="index"),  # Lista de libros en 'index'
+    
     path('formagg/', views.agregar_libro, name='formagg'),  # Ruta para agregar un libro
     path('Tesis/', views.listar_tesis, name='listar_tesis'),  # Lista de tesis
     path('formTesis/', views.crear_editar_tesis, name='formTesis'),  # Ruta para crear una nueva tesis
@@ -20,4 +25,8 @@ urlpatterns = [
     path('libros/agregar/', views.agregar_libro, name='agregar_libro'),  # Agregar libro
     path('libros/editar/<int:id>/', views.editar_libro, name='editar_libro'),  # Editar libro
     path('libros/eliminar/<int:id>/', views.eliminar_libro, name='eliminar_libro'),  # Eliminar libro
+    
+    # LOGIN
+    path('login/validar-correo/', views.validar_correo, name='validar_correo'),
+    path('login/validar-password/', views.validar_password, name='validar_password'),
 ]

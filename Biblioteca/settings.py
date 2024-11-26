@@ -122,6 +122,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/statics/'
+# CSRF_COOKIE_SECURE = True  # Solo si estás usando HTTPS
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',  # Añadir la URL de tu aplicación
+    # 'https://127.0.0.1:8000',  # Si usas HTTPS
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

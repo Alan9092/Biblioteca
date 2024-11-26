@@ -14,7 +14,7 @@ from mainApp.models import Usuario  # Ahora debería poder importar correctament
 
 # Lista de usuarios a agregar
 usuarios = [
-    {'nombre': 'gabi2', 'password': 'gabi2', 'correo': 'gabi2@gabi2.com'},  # Agrega más usuarios si lo deseas
+    {'nombre': 'Gabriela', 'password': '123', 'correo': 'a20210155@utem.edu.mx'},  # Agrega más usuarios si lo deseas
     # {'nombre': 'juan', 'password': 'juan123', 'correo': 'juan@example.com'},
 ]
 

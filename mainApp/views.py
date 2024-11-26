@@ -3,6 +3,62 @@ from django.http import HttpResponse
 from django.views import View
 from .forms import LibroForm, PrestamoForm, TesisForm
 from .models import Libro, Prestamo, Tesis
+from django.http import JsonResponse
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from .models import Usuario
+from django.contrib.auth.hashers import check_password
+from django.views.decorators.csrf import csrf_exempt
+
+# views.py
+
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        
+        # Usamos el método authenticate de Django para verificar las credenciales
+        user = authenticate(request, username=email, password=password)
+        
+        if user is not None:
+            login(request, user)  # Inicia sesión al usuario
+            return redirect('index')  # Redirige al index después de login exitoso
+        else:
+            messages.error(request, 'Correo o contraseña incorrectos')  # Muestra el mensaje de error
+            return render(request, 'login.html')  # Vuelve a cargar el formulario de login
+    
+    return render(request, 'login.html')  # Muestra la página de login si no es un POST
+
+def index_view(request):
+    return render(request, 'index.html')  # Redirige a index.html
+
+# Vista para validar el correo
+@csrf_exempt
+def validar_correo(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        try:
+            usuario = Usuario.objects.get(correo=email)
+            return JsonResponse({"valid": True, "correo": usuario.correo})
+        except Usuario.DoesNotExist:
+            return JsonResponse({"valid": False, "message": "No existe el correo."})
+    return JsonResponse({"valid": False, "message": "Método no permitido."})
+
+# Vista para validar la contraseña
+@csrf_exempt
+def validar_password(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        try:
+            usuario = Usuario.objects.get(correo=email)
+            if check_password(password, usuario.password):  # Comprobamos la contraseña
+                return JsonResponse({"valid": True, "redirect_url": "/index/"})
+            else:
+                return JsonResponse({"valid": False, "message": "Contraseña incorrecta."})
+        except Usuario.DoesNotExist:
+            return JsonResponse({"valid": False, "message": "Usuario no encontrado."})
+    return JsonResponse({"valid": False, "message": "Método no permitido."})
 
 # Create your views here.
 def inicio(request):
