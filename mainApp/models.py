@@ -28,21 +28,20 @@ class UsuarioManager(BaseUserManager):
         return self.create_user(correo, password, **extra_fields)
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
-    idUsuario = models.AutoField(primary_key=True)  # Mantengo este campo como lo tienes
-    nombre = models.CharField(max_length=150)      # Sin cambios
-    correo = models.EmailField(max_length=255, unique=True)  # Campo único para login
-    password = models.CharField(max_length=128)    # Sin cambios
+    idUsuario = models.AutoField(primary_key=True)  
+    nombre = models.CharField(max_length=150)      
+    correo = models.EmailField(max_length=255, unique=True)  
+    password = models.CharField(max_length=128)    
 
-    is_active = models.BooleanField(default=True)  # Necesario para login
-    is_staff = models.BooleanField(default=False)  # Requerido para superusuarios
+    is_active = models.BooleanField(default=True) 
+    is_staff = models.BooleanField(default=False)  
 
-    objects = UsuarioManager()  # Vincula el manager personalizado
-
-    USERNAME_FIELD = 'correo'  # Campo usado para login
-    REQUIRED_FIELDS = ['nombre']  # Campo adicional obligatorio al crear superusuarios
+    objects = UsuarioManager()  
+    USERNAME_FIELD = 'correo'  
+    REQUIRED_FIELDS = ['nombre']  
 
     def save(self, *args, **kwargs):
-        # Cifra la contraseña automáticamente si no lo está
+       
         if not self.password.startswith('pbkdf2_'):
             self.password = make_password(self.password)
         super().save(*args, **kwargs)

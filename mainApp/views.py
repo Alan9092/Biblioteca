@@ -15,7 +15,7 @@ from django.contrib.auth import logout
 
 def logout_view(request):
     logout(request)  # Cierra la sesión del usuario
-    return redirect('login')  # Redirige al usuario a la p
+    return redirect('login')  
 
 @login_not_required
 def login_view(request):
