@@ -4,7 +4,8 @@ from . import views
 urlpatterns = [
     path('', views.login_view, name='login'),  # Redirige directamente a la vista de login
     path('login/', views.login_view, name='login'),  # Vista del login
-    path('index/', views.index_view, name='index'),  # Vista del index, después de login
+    path('index/', views.index, name='index'),  # Vista del index, después de login
+     path('logout/', views.logout_view, name='logout'),
     path('sidebar/', views.dashboard, name="sidebar"),
     
     # Asegúrate de tener solo una ruta para 'index'

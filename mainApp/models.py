@@ -1,19 +1,50 @@
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 
-class Usuario(models.Model):
-    idUsuario = models.AutoField(primary_key=True)  # Campo autoincremental
-    nombre = models.CharField(max_length=150)      # Campo de texto con un límite de 150 caracteres
-    correo = models.EmailField(max_length=255, unique=True)  # Nuevo campo de correo único
-    password = models.CharField(max_length=128)    # Campo para almacenar la contraseña cifrada
 
-    # Sobrescribir el método save para cifrar la contraseña automáticamente
+class UsuarioManager(BaseUserManager):
+    """Manager personalizado para el modelo Usuario."""
+    def create_user(self, correo, password=None, **extra_fields):
+        if not correo:
+            raise ValueError('El correo electrónico es obligatorio.')
+        correo = self.normalize_email(correo)
+        user = self.model(correo=correo, **extra_fields)
+        user.set_password(password)  # Cifra la contraseña automáticamente
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, correo, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('El superusuario debe tener is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('El superusuario debe tener is_superuser=True.')
+
+        return self.create_user(correo, password, **extra_fields)
+
+class Usuario(AbstractBaseUser, PermissionsMixin):
+    idUsuario = models.AutoField(primary_key=True)  # Mantengo este campo como lo tienes
+    nombre = models.CharField(max_length=150)      # Sin cambios
+    correo = models.EmailField(max_length=255, unique=True)  # Campo único para login
+    password = models.CharField(max_length=128)    # Sin cambios
+
+    is_active = models.BooleanField(default=True)  # Necesario para login
+    is_staff = models.BooleanField(default=False)  # Requerido para superusuarios
+
+    objects = UsuarioManager()  # Vincula el manager personalizado
+
+    USERNAME_FIELD = 'correo'  # Campo usado para login
+    REQUIRED_FIELDS = ['nombre']  # Campo adicional obligatorio al crear superusuarios
+
     def save(self, *args, **kwargs):
-        # Verifica si la contraseña ya está cifrada
+        # Cifra la contraseña automáticamente si no lo está
         if not self.password.startswith('pbkdf2_'):
-            self.password = make_password(self.password)  # Cifra la contraseña
+            self.password = make_password(self.password)
         super().save(*args, **kwargs)
 
     def __str__(self):

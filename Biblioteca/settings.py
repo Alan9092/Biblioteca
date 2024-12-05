@@ -16,6 +16,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOGIN_URL = '/login/'  # Ruta a la vista de login
+LOGIN_REDIRECT_URL = '/index/'  # Ruta de redirección tras login
+LOGOUT_REDIRECT_URL = '/login/'  # Ruta tras logout
+LOGIN_NOT_REQUIRED_PATHS = [
+    '/login/',   # Ruta para la vista de login
+    '/validar-correo/',
+    '/validar-password/',
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -46,9 +54,14 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'login_required.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # El backend predeterminado
 ]
 
 ROOT_URLCONF = 'Biblioteca.urls'
@@ -132,3 +145,4 @@ CSRF_TRUSTED_ORIGINS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'mainApp.Usuario'

@@ -9,30 +9,32 @@ from django.contrib import messages
 from .models import Usuario
 from django.contrib.auth.hashers import check_password
 from django.views.decorators.csrf import csrf_exempt
+from login_required import login_not_required
+from django.contrib.auth import login
+from django.contrib.auth import logout
 
-# views.py
+def logout_view(request):
+    logout(request)  # Cierra la sesión del usuario
+    return redirect('login')  # Redirige al usuario a la p
 
+@login_not_required
 def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        
-        # Usamos el método authenticate de Django para verificar las credenciales
         user = authenticate(request, username=email, password=password)
         
         if user is not None:
-            login(request, user)  # Inicia sesión al usuario
-            return redirect('index')  # Redirige al index después de login exitoso
+            login(request, user)
+            return redirect(settings.LOGIN_REDIRECT_URL)
         else:
-            messages.error(request, 'Correo o contraseña incorrectos')  # Muestra el mensaje de error
-            return render(request, 'login.html')  # Vuelve a cargar el formulario de login
-    
-    return render(request, 'login.html')  # Muestra la página de login si no es un POST
-
-def index_view(request):
-    return render(request, 'index.html')  # Redirige a index.html
+            messages.error(request, 'Correo o contraseña incorrectos')
+            return render(request, 'login.html')
+    return render(request, 'login.html')
 
 # Vista para validar el correo
+
+@login_not_required 
 @csrf_exempt
 def validar_correo(request):
     if request.method == "POST":
@@ -45,22 +47,29 @@ def validar_correo(request):
     return JsonResponse({"valid": False, "message": "Método no permitido."})
 
 # Vista para validar la contraseña
+
+@login_not_required 
 @csrf_exempt
 def validar_password(request):
-    if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        try:
-            usuario = Usuario.objects.get(correo=email)
-            if check_password(password, usuario.password):  # Comprobamos la contraseña
-                return JsonResponse({"valid": True, "redirect_url": "/index/"})
-            else:
-                return JsonResponse({"valid": False, "message": "Contraseña incorrecta."})
-        except Usuario.DoesNotExist:
-            return JsonResponse({"valid": False, "message": "Usuario no encontrado."})
-    return JsonResponse({"valid": False, "message": "Método no permitido."})
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'valid': True, 'redirect_url': '/index/'})
+        else:
+            return JsonResponse({'valid': False, 'message': 'Credenciales inválidas'})
+
+
 
 # Create your views here.
+
+
+def index(request):
+    return render(request, 'index.html')  # Redirige a index.html
+
 def inicio(request):
     return render(request, 'index.html')
 
@@ -85,6 +94,9 @@ def formTesis(request):
     return render(request, 'formTesis.html')
 
 # Vista para listar libros
+def index(request):
+    libros = Libro.objects.all()
+    return render(request, 'index.html', {'libros': libros}) 
 def lista_libros(request):
     libros = Libro.objects.all()
     return render(request, 'index.html', {'libros': libros})

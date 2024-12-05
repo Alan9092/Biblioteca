@@ -18,7 +18,10 @@
                     <label for="email" class="input-label">Correo electrónico</label>
                     <input type="email" id="email" name="email" class="input-field" placeholder="Ingresa tu correo" required>
                 </div>
-                <button id="nextStep" type="submit" class="btn-submit animate-fade-in">Siguiente</button>
+                <button id="nextStep" type="submit" class="btn-submit animate-fade-in">
+                    <span>Siguiente</span>
+                    <span id="spinner-email" style="display:none;" class="fa fa-spinner fa-spin"></span>
+                </button>
                 <div id="error-message" style="display:none; color:red; text-align:center; margin-top:10px;">Correo no válido</div>
             </form>
         </div>
@@ -26,7 +29,7 @@
         <!-- Fase 2: Validación de contraseña -->
         <div id="fase2" class="login-form" style="display: none;">
             <h1 class="login-title">Bienvenido, <span class="email-text" id="displayEmail"></span></h1>
-            <form id="passwordForm" method="POST">
+            <form id="fase2Form" method="POST">
                 {% csrf_token %}
                 <div class="input-group animate-fade-in">
                     <label for="password" class="input-label">Contraseña</label>
@@ -34,22 +37,13 @@
                 </div>
                 <button id="signIn" type="submit" class="btn-submit animate-fade-in">
                     <span id="btnText">Iniciar sesión</span>
-                    <!-- Spinner con Font Awesome -->
-                    <span id="spinner" style="display:none;" class="fa fa-spinner fa-spin"></span>  <!-- Spinner con icono Font Awesome -->
+                    <span id="spinner-password" style="display:none;" class="fa fa-spinner fa-spin"></span>
                 </button>
-                
-                <!-- Mostrar el mensaje de error si la contraseña es incorrecta
-                {% if messages %}
-                    <div style="color:red; text-align:center;">
-                        {% for message in messages %}
-                            <p>{{ message }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %} -->
+                <div id="error-container" style="color:red; text-align:center; margin-top:10px; display:none;">Contraseña incorrecta</div>
             </form>
         </div>
     </div>
 
-    <script src="../statics/js/scripts.js"></script>
+<script src="../statics/js/scripts.js"></script>
 </body>
 </html>
